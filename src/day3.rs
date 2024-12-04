@@ -18,9 +18,9 @@ mod test {
     }
 
     #[test_case(SAMPLE_INPUT => 48; "with sample data")]
-    #[test_case(PERSONAL_INPUT => 48; "with real data")]
+    #[test_case(PERSONAL_INPUT => 127092535; "with real data")]
     fn problem2(input: &str) -> u64 {
-        let re = Regex::new(r"(mul\(([0-9]{1,3}),([0-9]{1,3})\)|don't\(\)|do\(\))")
+        let re = Regex::new(r"(mul\((\d{1,3}),(\d{1,3})\)|don't\(\)|do\(\))")
             .expect("Should be a valid regex");
 
         let mut mul_enabled = true;
