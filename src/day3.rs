@@ -16,4 +16,26 @@ mod test {
         }
         res
     }
+
+    #[test_case(SAMPLE_INPUT => 48; "with sample data")]
+    #[test_case(PERSONAL_INPUT => 48; "with real data")]
+    fn problem2(input: &str) -> u64 {
+        let re = Regex::new(r"(mul\(([0-9]{1,3}),([0-9]{1,3})\)|don't\(\)|do\(\))")
+            .expect("Should be a valid regex");
+
+        let mut mul_enabled = true;
+        let mut res = 0;
+
+        for capture in re.captures_iter(input) {
+            if capture[0] == *"do()" {
+                mul_enabled = true;
+            } else if capture[0] == *"don't()" {
+                mul_enabled = false;
+            } else if mul_enabled {
+                res += capture[2].parse::<u64>().unwrap() * capture[3].parse::<u64>().unwrap();
+            }
+        }
+
+        res
+    }
 }
